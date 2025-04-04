@@ -1,17 +1,27 @@
-const user = {
-    name: 'vyshnav',
-    age: 52,
-    contact: {
-        country: 'india',
-        phone: 1235754,
+const yargs = require('yargs');
+const todo = require('./todo.js');
+
+yargs.command({
+    command: 'add',
+    describe: 'add a new task',
+    builder: {
+        task: {
+            describe: 'task to add',
+            demandOption: true,
+            type: 'string',
+        }
+    },
+    handler(argv){
+        todo.add(argv.task);
     }
-}
+});
 
-console.log(user.name);
-console.log(user.contact.country);
+yargs.command({
+    command: 'list',
+    describe: 'list out the tasks',
+    handler(){
+        todo.list();
+    }
+})
 
-const {name, age} = user;
-console.log(name, age);
-
-const update = {...user, city: 'chennai'};
-console.log(update);
+yargs.parse();
