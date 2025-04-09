@@ -1,7 +1,11 @@
+const express = require('express');
+const app = express();
+const userRoutes = require('./routes/book.routes');
 
-const app = require('./src/app');
+app.use(express.json());
 
-const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`server running on http://localhost:${PORT}`);
+app.use('/api/users', userRoutes);
+
+app.listen(5000, () => {
+    console.log("server running on http://localhost:5000");
 });
